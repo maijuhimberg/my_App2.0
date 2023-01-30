@@ -1,7 +1,6 @@
-import {StyleSheet, Text, View, FlatList, TouchableOpacity, Image, SafeAreaView} from 'react-native';
+import {StyleSheet, SafeAreaView} from 'react-native';
 import {StatusBar} from 'expo-status-bar';
 import List from './components/List';
-
 
 const App = () => {
   return (
@@ -9,20 +8,19 @@ const App = () => {
       <SafeAreaView style={styles.container}>
         <List />
       </SafeAreaView>
-      <StatusBar style="auto"/>
+      <StatusBar style="auto" />
     </>
   );
 };
 
 const styles = StyleSheet.create({
- container: {
-   flex: 1,
-   backgroundColor: '#fff',
-   alignItems: 'center',
-   justifyContent: 'center',
-   padding: 20
-
- },
+  container: {
+    flex: 1,
+    backgroundColor: '#2f0a7a',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 20,
+  },
 });
 
 export default App;
