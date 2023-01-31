@@ -1,9 +1,33 @@
-import {FlatList, StyleSheet} from 'react-native';
+import {FlatList} from 'react-native';
+import {useEffect, useState} from 'react';
 import ListItem from './ListItem';
-import {useMedia} from '../hooks/ApiHooks';
+import {baseUrl} from '../utils/variables';
 
 const List = () => {
-  const {mediaArray} = useMedia();
+  const [mediaArray, setMediaArray] = useState([]);
+
+  const loadMedia = async () => {
+    try {
+      const response = await fetch(baseUrl + 'media');
+      const json = await response.json();
+      const media = await Promise.all(
+        json.map(async (file) => {
+          const fileResponse = await fetch(baseUrl + 'media/' + file.file_id);
+          return await fileResponse.json();
+        })
+      );
+
+      setMediaArray(media);
+    } catch (error) {
+      console.error('List, loadMedia', error);
+    }
+  };
+
+  useEffect(() => {
+    loadMedia();
+  }, []);
+
+  console.log('List, mediaArray', mediaArray);
   return (
     <FlatList
       data={mediaArray}
